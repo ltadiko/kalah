@@ -1,0 +1,17 @@
+spring:
+  spring:
+    profiles:
+      active: local
+  data:
+    mongodb:
+      hosts: localhost
+      port: 27018
+      database: Kalah
+      tls:
+        enabled: false
+
+server:
+  port: 80
+
+
+
