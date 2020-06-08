@@ -27,7 +27,7 @@ public class GameServiceImpl implements GameService {
         //initialize player
         Game game = Game.builder()
                 .id(IdGeneratorUtil.generateGameId())
-                .pits(new int[]{4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0})
+                .pits(new int[]{6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0})
                 .isSecondPlayerMove(false)
                 .gameStatus(GameStatus.CREATED)
                 .build();
