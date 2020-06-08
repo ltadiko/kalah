@@ -9,6 +9,8 @@ spring:
       database: Kalah
       tls:
         enabled: false
+kalah:
+  initialNumberOfStones: 6
 
 server:
   port: 80

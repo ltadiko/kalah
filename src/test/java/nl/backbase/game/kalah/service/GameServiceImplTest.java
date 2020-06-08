@@ -35,7 +35,7 @@ public class GameServiceImplTest implements WithBDDMockito {
 
     @BeforeEach
     void setUp() {
-        underTest = new GameServiceImpl(gameRepository);
+        underTest = new GameServiceImpl(gameRepository, 6);
     }
 
     @Test

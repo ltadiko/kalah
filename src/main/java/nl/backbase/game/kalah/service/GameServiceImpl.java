@@ -8,6 +8,7 @@ import nl.backbase.game.kalah.domain.exception.GameNotFoundException;
 import nl.backbase.game.kalah.domain.exception.InvalidPitException;
 import nl.backbase.game.kalah.repository.GameRepository;
 import nl.backbase.game.kalah.utils.IdGeneratorUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.IntStream;
@@ -17,17 +18,21 @@ import java.util.stream.IntStream;
 public class GameServiceImpl implements GameService {
 
     private GameRepository gameRepository;
+    private int initialNumberOfStones;
 
-    public GameServiceImpl(GameRepository gameRepository) {
+    public GameServiceImpl(GameRepository gameRepository,
+                           @Value("${kalah.initialNumberOfStones}") int initialNumberOfStones) {
         this.gameRepository = gameRepository;
+        this.initialNumberOfStones = initialNumberOfStones;
     }
 
     @Override
     public Game createGame() {
         //initialize player
+
         Game game = Game.builder()
                 .id(IdGeneratorUtil.generateGameId())
-                .pits(new int[]{6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0})
+                .pits(getInitializedPits())
                 .isSecondPlayerMove(false)
                 .gameStatus(GameStatus.CREATED)
                 .build();
@@ -167,5 +172,15 @@ public class GameServiceImpl implements GameService {
         } else {
             return GameStatus.DRAW;
         }
+    }
+
+
+    private int[] getInitializedPits() {
+        return new int[]{
+                initialNumberOfStones, initialNumberOfStones, initialNumberOfStones, initialNumberOfStones, initialNumberOfStones, initialNumberOfStones,
+                0,
+                initialNumberOfStones, initialNumberOfStones, initialNumberOfStones, initialNumberOfStones, initialNumberOfStones, initialNumberOfStones,
+                0
+        };
     }
 }
